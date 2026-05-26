@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href='https://fonts.googleapis.com/css?family=RobotoDraft' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box; /* مهم برای محاسبات صحیح عرض */
+      font-family: 'RobotoDraft', sans-serif;
+    }
+    
+    body {
+      overflow-x: hidden; /* جلوگیری از اسکرول افقی کل صفحه */
+    }
+
+    .newmessage {
+      cursor: pointer;
+    }
+
+    aside {
+      height: 100vh;
+      overflow-y: auto; /* اسکرول عمودی */
+      overflow-x: hidden; /* مخفی کردن اسکرول افقی */
+      border-right: 1px solid #dee2e6;
+      background-color: #f8f9fa;
+      width: 100%; /* اطمینان از اینکه عرض کامل را می‌گیرد */
+      position: relative;
+    }
+    
+    /* استایل‌های لیست ایمیل */
+    .email-item {
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+      word-wrap: break-word; /* شکستن کلمات طولانی */
+      overflow-wrap: break-word;
+    }
+    
+    .email-item:hover {
+      background-color: #f8f9fa;
+    }
+    
+    .email-item.active {
+      background-color: #e9ecef;
+    }
+    
+    .avatar-img {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+      border-radius: 50%;
+      flex-shrink: 0; /* جلوگیری از جمع شدن عکس */
+    }
+    
+    .email-info {
+      width: 100%;
+      overflow: hidden; /* مخفی کردن محتوای اضافی */
+    }
+
+    .email-preview {
+      font-size: 0.85rem;
+      color: #6c757d;
+      line-height: 1.4;
+      /* محدود کردن به 2 خط و اضافه کردن سه نقطه */
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: 5px;
+      word-wrap: break-word;
+    }
+
+    /* بخش نمایشگر اصلی */
+    .email-viewer {
+      padding: 20px;
+      /* ارتفاع ثابت نیست تا wrap شود */
+      min-height: 100vh;
+    }
+
+    .email-content-box {
+      width: 100%;
+      padding: 20px;
+      border: 1px solid #eee;
+      border-radius: 5px;
+      background-color: #fff;
+      word-wrap: break-word; /* شکستن کلمات در متن اصلی */
+    }
+    
+    .email-body {
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <main class="container-fluid">
+    <section class="row">
+      <aside class="col-md-3">
+        <section>
+          <h1 class="p-3">Google.com</h1>
+        </section>
+        <section>
+          <div class="container mt-3 p-0">
+            <a class="bg-dark d-block p-3 text-white text-decoration-none newmessage" data-bs-toggle="modal"
+              data-bs-target="#myModal">
+              new message
+              <i class="bi bi-pencil-fill"></i>
+            </a>
+          </div>
+
+          <!-- The Modal -->
+          <div class="modal fade" id="myModal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header bg-danger">
+                  <h4 class="modal-title text-white">Send Mail</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                  <form action="#">
+                    <label for="to" class="w-100 d-block">to</label>
+                    <input type="text" name="to" class="w-100 p-2" required>
+                    <label for="from" class="d-block">from</label>
+                    <input type="text" name="from" class="w-100 p-2" required>
+                    <label for="subject" class="d-block">subject</label>
+                    <input type="text" name="subject" class="w-100 p-2">
+                    <textarea name="body" id="" rows="5" class="d-block w-100 p-2 mt-2"
+                      placeholder="What's on your mind!"></textarea>
+                  </form>
+                </div>
+                <div class="modal-footer d-flex justify-content-between">
+                  <button type="button" class="btn btn-danger d-inline-block" data-bs-dismiss="modal">
+                    Cancel <i class="bi bi-x-lg"></i></button>
+                  <button type="button" class="btn btn-secondary d-inline-block" data-bs-dismiss="modal">Send<i class="bi bi-send-fill"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <section>
+          <div id="accordion">
+            <!-- Inbox -->
+            <div class="card">
+              <div class="card-header bg-danger rounded-0">
+                <a class="btn text-white d-block text-start ps-0" data-bs-toggle="collapse" href="#collapseOne">
+                  inbox(3)
+                </a>
+              </div>
+              <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
+                <div class="card-body p-0">
+                  <div id="inbox-content"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sent -->
+            <div class="card">
+              <div class="card-header">
+                <a class="collapsed btn" data-bs-toggle="collapse" href="#collapseTwo">
+                  <i class="bi bi-send-fill"></i> Sent
+                </a>
+              </div>
+              <div id="collapseTwo" class="collapse" data-bs-parent="#accordion">
+                <div class="card-body p-0">
+                  <div id="sent-content"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Drafts -->
+            <div class="card">
+              <div class="card-header">
+                <a class="collapsed btn" data-bs-toggle="collapse" href="#collapseThree">
+                  <i class="bi bi-hourglass-split"></i> Drafts
+                </a>
+              </div>
+              <div id="collapseThree" class="collapse" data-bs-parent="#accordion">
+                <div class="card-body p-0">
+                  <div id="drafts-content"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Trash -->
+            <div class="card">
+              <div class="card-header">
+                <a class="collapsed btn" data-bs-toggle="collapse" href="#collapseFour">
+                  <i class="bi bi-trash"></i> Trash
+                </a>
+              </div>
+              <div id="collapseFour" class="collapse" data-bs-parent="#accordion">
+                <div class="card-body p-0">
+                  <div id="trash-content"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </aside>
+      
+      <article class="col-md-9 email-viewer" id="email-viewer">
+        <div class="text-center text-muted mt-5">
+          <i class="bi bi-envelope-open fs-1"></i>
+          <p class="mt-3">Select an email to read</p>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+    let emailsData = {};
+
+    async function loadEmails() {
+      try {
+        const response = await fetch('emails.json');
+        if (!response.ok) throw new Error('Network response was not ok');
+        emailsData = await response.json();
+        
+        renderSection('inbox', 'inbox-content');
+        renderSection('sent', 'sent-content');
+        renderSection('drafts', 'drafts-content');
+        renderSection('trash', 'trash-content');
+        
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+
+    function renderSection(sectionName, containerId) {
+      const container = document.getElementById(containerId);
+      const list = emailsData[sectionName] || [];
+      
+      for (let index in list) {
+        let email = list[index];
+        
+        let emailDiv = document.createElement('div');
+        emailDiv.className = 'email-item';
+        
+        emailDiv.onclick = function() {
+          let allItems = document.querySelectorAll('.email-item');
+          allItems.forEach(item => item.classList.remove('active'));
+          this.classList.add('active');
+          showEmailDetail(email);
+        };
+
+        let previewText = "";
+        if (email.body.length > 100) {
+          previewText = email.body.slice(0, 100) + "...";
+        } else {
+          previewText = email.body;
+        }
+
+        // ساختار HTML بهینه شده برای جلوگیری از اسکرول افقی
+        emailDiv.innerHTML = `
+          <div class="d-flex align-items-start">
+            <img src="${email.pic}" alt="${email.fullname}" class="avatar-img me-2">
+            <div class="email-info">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <strong class="text-truncate" style="max-width: 120px;">${email.fullname}</strong>
+                <small class="text-muted ms-2" style="white-space: nowrap;">${email.date}</small>
+              </div>
+              <div class="email-subject mb-1 text-truncate">${email.subject}</div>
+              <div class="email-preview">${previewText}</div>
+            </div>
+          </div>
+        `;
+        container.appendChild(emailDiv);
+      }
+    }
+
+    function showEmailDetail(email) {
+      const emailViewer = document.getElementById('email-viewer');
+      
+      const headerHTML = `
+        <div class="email-content-box">
+          <div class="d-flex align-items-center mb-4">
+            <img src="${email.pic}" alt="${email.fullname}" class="avatar-img me-3">
+            <div>
+              <h4 class="mb-0">${email.subject}</h4>
+              <small class="text-muted">From: ${email.fullname}</small>
+              <br>
+              <small class="text-muted">Date: ${email.date}</small>
+            </div>
+          </div>
+          <div class="mb-4">
+            <a href="#" class="btn btn-outline-secondary me-2"><i class="bi bi-reply"></i> Reply</a>
+            <a href="#" class="btn btn-outline-secondary"><i class="bi bi-forward-fill"></i> Forward</a>
+          </div>
+          <div class="email-body fs-5 lh-base">
+            ${email.body.replace(/\n/g, '<br>')}
+          </div>
+        </div>
+      `;
+      emailViewer.innerHTML = headerHTML;
+      emailViewer.scrollTop = 0;
+    }
+
+    document.addEventListener('DOMContentLoaded', loadEmails);
+  </script>
+</body>
+</html>

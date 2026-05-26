@@ -1,0 +1,74 @@
+{
+    "inbox": [
+      {
+        "pic": "images/avatar3.png",
+        "fullname": "Borge Refsnes",
+        "subject": "Remember Me",
+        "date": "1995-02-16",
+        "body": "Hello, i just wanted to let you know that i'll be home at lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\n\nBest Regards,\nBorge Refsnes",
+        "signature": "Borge Refsnes"
+      },
+      {
+        "pic": "images/avatar5.png",
+        "fullname": "Jane Doe",
+        "subject": "Meeting Update",
+        "date": "Sep 25, 2015",
+        "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\n\nForever yours,\nJane",
+        "signature": "Jane Doe"
+      },
+      {
+        "pic": "images/avatar2.png",
+        "fullname": "John Doe",
+        "subject": "Welcome",
+        "date": "Sep 23, 2015",
+        "body": "Welcome. That's it! Please verify your account.",
+        "signature": "John Doe"
+      },
+      {
+        "pic": "images/avatar3.png",
+        "fullname": "HR Department",
+        "subject": "Pay Slip",
+        "date": "Oct 01, 2023",
+        "body": "Please find your pay slip for September attached.",
+        "signature": "HR Team"
+      }
+    ],
+    "sent": [
+      {
+        "pic": "images/avatar5.png",
+        "fullname": "Alice Smith",
+        "subject": "Project Proposal",
+        "date": "Oct 10, 2023",
+        "body": "Hi Bob, please find attached the project proposal for your review. Let me know if you have any questions. Best, Alice",
+        "signature": "Alice Smith"
+      },
+      {
+        "pic": "images/avatar3.png",
+        "fullname": "HR Department",
+        "subject": "Pay Slip",
+        "date": "Oct 01, 2023",
+        "body": "Please find your pay slip for September attached.",
+        "signature": "HR Team"
+      }
+    ],
+    "drafts": [
+      {
+        "pic": "images/avatar5.png",
+        "fullname": "System Draft",
+        "subject": "Unfinished Report",
+        "date": "Yesterday",
+        "body": "This is a draft of the quarterly report. It needs more data regarding Q3 sales figures...",
+        "signature": "Me"
+      }
+    ],
+    "trash": [
+      {
+        "pic": "images/avatar2.png",
+        "fullname": "Spam Bot",
+        "subject": "Win a Prize!",
+        "date": "Aug 01, 2020",
+        "body": "Congratulations! You have won a lottery. Click here to claim your prize...",
+        "signature": "Spam"
+      }
+    ]
+  }
